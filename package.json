@@ -1,7 +1,7 @@
 {
   "name": "@saba-burduli/pi-browser-search-extension",
   "version": "0.1.1",
-  "description": "/search command extension package for Pi Coding Agent",
+  "description": "Pi Harness /search extension with system-default and multi-browser support",
   "license": "MIT",
   "author": "Saba Burduli",
   "repository": {
@@ -17,7 +17,8 @@
     "pi-extension",
     "pi-harness",
     "search",
-    "chrome"
+    "browser",
+    "multi-browser"
   ],
   "engines": {
     "node": ">=20"

@@ -1,6 +1,6 @@
 # Browser Search Extension
 
-Pi Harness extension that opens Google search results directly from `/search <query>` with minimal, terminal-silent UX.
+Pi Harness extension that opens Google search results directly from `/search <query>` with multi-browser support and minimal terminal-silent UX.
 
 NPM package:
 - https://www.npmjs.com/package/@saba-burduli/pi-browser-search-extension
@@ -21,6 +21,7 @@ Primary behavior:
 - Native Pi extension command: `/search <query>`
 - Dynamic query support (no hardcoded terms)
 - Browser support: `system`, `chrome`, `firefox`, `brave`, `safari`, `dia`
+- System-default browser auto-detection on macOS when `defaultBrowser=system`
 - Trusted host enforcement (`https://www.google.com/search?q=...`)
 - Config-driven dry-run and auto-open toggles
 - Dynamic context hook (`beforeTurn`) for search intent biasing
@@ -138,6 +139,7 @@ npm run pack:check
 
 ## Compatibility
 - Platform: macOS launcher path implemented (`open -a "<Browser App>" ...`)
+- Browsers: Chrome, Firefox, Brave, Safari, Dia, and system default routing
 - Node.js: `>=20`
 
 ## Developer

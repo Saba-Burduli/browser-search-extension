@@ -28,7 +28,7 @@ Open an issue or discussion in:
 Include:
 - npm package link
 - GitHub repository link
-- Short feature summary
+- Short feature summary (include multi-browser support: system default, Chrome, Firefox, Brave, Safari, Dia)
 - Safety model (trusted URLs, sanitized query)
 - Demo GIF/video or screenshot (optional but recommended)
 - Maintenance commitment and contact
@@ -39,7 +39,7 @@ Title:
 - `Package submission: @saba-burduli/pi-browser-search-extension`
 
 Body:
-- What it does
+- What it does (fast `/search` command with multi-browser support)
 - Why it is useful
 - How to install (`pi install npm:@saba-burduli/pi-browser-search-extension`)
 - Security notes
