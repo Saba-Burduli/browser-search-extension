@@ -9,8 +9,6 @@ The extension converts query text into a trusted Google search URL and opens it 
 ## Available Commands
 - `search <query>`
   - Opens `https://www.google.com/search?q=<encoded_query>`
-- `search --incognito <query>`
-  - Opens in Chrome incognito mode
 - `search --dry-run <query>`
   - Prints URL only, no browser launch
 
@@ -25,9 +23,7 @@ Execution is system-level (real process launch), not simulated output.
 ## Usage Examples
 - `search latest dotnet performance`
 - `search "pi harness context engineering"`
-- `search --incognito prompt injection mitigation`
 - `/search latest codex release notes`
-- `/search-incognito terminal automation hardening`
 
 ## Behavior Rules
 - Fast, minimal responses.

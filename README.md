@@ -20,11 +20,7 @@ terminal-browser-search-extension/
     ├── SYSTEM.md
     ├── terminal-browser-search.config.json
     ├── prompts/
-    │   ├── search.md
-    │   └── search-incognito.md
-    ├── skills/
-    │   └── browser-search/
-    │       └── SKILL.md
+    │   └── search.md
     └── extensions/
         └── terminal-browser-search/
             ├── extension.json
@@ -96,8 +92,6 @@ Use `dist/hooks.js` for runtime hooks:
 ## Prompt Templates
 - `/search latest dotnet performance`
   - Expands to `search "latest dotnet performance"`
-- `/search-incognito ai safety papers`
-  - Expands to `search --incognito "ai safety papers"`
 
 ## Error Handling
 - Empty query: returns usage error

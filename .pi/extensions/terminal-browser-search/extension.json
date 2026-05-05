@@ -15,12 +15,8 @@
     "compact": "dist/hooks.js",
     "agentContext": "dist/hooks.js"
   },
-  "skills": [
-    "../../skills/browser-search/SKILL.md"
-  ],
   "systemPrompt": "../../SYSTEM.md",
   "templates": {
-    "search": "../../prompts/search.md",
-    "search-incognito": "../../prompts/search-incognito.md"
+    "search": "../../prompts/search.md"
   }
 }
