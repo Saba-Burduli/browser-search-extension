@@ -1,0 +1,21 @@
+{
+  "autoOpenBrowser": true,
+  "dryRun": false,
+  "defaultBrowser": "chrome",
+  "searchEngine": {
+    "name": "google",
+    "baseUrl": "https://www.google.com/search",
+    "queryParam": "q",
+    "allowedHosts": ["www.google.com", "google.com"]
+  },
+  "incognito": false,
+  "context": {
+    "maxMessagesForSearchIntent": 12
+  },
+  "compaction": {
+    "enabled": true,
+    "maxRecentQueries": 10,
+    "maxCommandHistory": 20,
+    "keepRecentMessages": 10
+  }
+}

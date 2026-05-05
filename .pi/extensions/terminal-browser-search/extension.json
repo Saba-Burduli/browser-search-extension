@@ -1,0 +1,26 @@
+{
+  "name": "terminal-browser-search",
+  "version": "1.0.0",
+  "description": "Pi Harness extension for terminal-first browser search using Google Chrome.",
+  "entry": "dist/extension.js",
+  "commands": [
+    {
+      "name": "search",
+      "description": "Open Google search in browser",
+      "bin": "bin/search.js"
+    }
+  ],
+  "hooks": {
+    "beforeTurn": "dist/hooks.js",
+    "compact": "dist/hooks.js",
+    "agentContext": "dist/hooks.js"
+  },
+  "skills": [
+    "../../skills/browser-search/SKILL.md"
+  ],
+  "systemPrompt": "../../SYSTEM.md",
+  "templates": {
+    "search": "../../prompts/search.md",
+    "search-incognito": "../../prompts/search-incognito.md"
+  }
+}
