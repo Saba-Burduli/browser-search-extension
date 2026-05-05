@@ -1,4 +1,6 @@
 import { execFileSync } from "node:child_process";
+import { homedir } from "node:os";
+import { join } from "node:path";
 import { MacOSBrowserLauncher } from "./launchers/MacOSBrowserLauncher";
 import type { BrowserKind, BrowserLaunchOptions, BrowserLaunchResult, ExtensionConfig, IBrowserLauncher } from "./types";
 
@@ -38,8 +40,23 @@ const BROWSER_PROFILES: Record<ExplicitBrowserKind, BrowserProfile> = {
   },
 };
 
-const DEFAULT_BROWSER_LOOKUP_SCRIPT =
-  'id of app (path to default application for URL "https://www.google.com")';
+const LAUNCH_SERVICES_PLIST = join(
+  homedir(),
+  "Library",
+  "Preferences",
+  "com.apple.LaunchServices",
+  "com.apple.launchservices.secure.plist",
+);
+
+type LaunchServicesHandler = {
+  LSHandlerRoleAll?: string;
+  LSHandlerURLScheme?: string;
+  LSHandlerContentType?: string;
+};
+
+type LaunchServicesDump = {
+  LSHandlers?: LaunchServicesHandler[];
+};
 
 function normalizeBundleId(bundleId: string): string {
   return bundleId.trim().toLowerCase();
@@ -67,19 +84,41 @@ function resolveBrowserFromBundleId(bundleId: string): ExplicitBrowserKind | und
   return undefined;
 }
 
-function detectMacOSDefaultBrowser(): ExplicitBrowserKind | undefined {
+function readLaunchServicesHandlers(): LaunchServicesHandler[] {
   try {
-    const bundleId = execFileSync("osascript", ["-e", DEFAULT_BROWSER_LOOKUP_SCRIPT], {
+    const output = execFileSync("plutil", ["-convert", "json", "-o", "-", LAUNCH_SERVICES_PLIST], {
       encoding: "utf8",
       stdio: ["ignore", "pipe", "ignore"],
-    })
-      .trim()
-      .toLowerCase();
-    if (!bundleId) return undefined;
-    return resolveBrowserFromBundleId(bundleId);
+    });
+
+    const parsed = JSON.parse(output) as LaunchServicesDump;
+    return Array.isArray(parsed.LSHandlers) ? parsed.LSHandlers : [];
   } catch {
-    return undefined;
+    return [];
   }
+}
+
+function getDefaultBrowserBundleIdFromHandlers(handlers: LaunchServicesHandler[]): string | undefined {
+  for (const handler of handlers) {
+    if (handler.LSHandlerURLScheme === "https" && handler.LSHandlerRoleAll) {
+      return handler.LSHandlerRoleAll;
+    }
+  }
+
+  for (const handler of handlers) {
+    if (handler.LSHandlerContentType === "com.apple.default-app.web-browser" && handler.LSHandlerRoleAll) {
+      return handler.LSHandlerRoleAll;
+    }
+  }
+
+  return undefined;
+}
+
+function detectMacOSDefaultBrowser(): ExplicitBrowserKind | undefined {
+  const handlers = readLaunchServicesHandlers();
+  const bundleId = getDefaultBrowserBundleIdFromHandlers(handlers);
+  if (!bundleId) return undefined;
+  return resolveBrowserFromBundleId(bundleId);
 }
 
 class MacOSSystemBrowserLauncher implements IBrowserLauncher {
