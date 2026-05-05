@@ -83,7 +83,7 @@ terminal-browser-search-extension/
             └── src/hooks.ts
 ```
 
-## Install
+## Install (Local Repo)
 From repo root:
 
 ```bash
@@ -98,12 +98,31 @@ Then reload Pi resources:
 /reload
 ```
 
+## Install (npm Package)
+After package publication:
+
+```bash
+pi install npm:pi-terminal-browser-search
+```
+
+Then reload resources:
+
+```text
+/reload
+```
+
 ## Development
 Build:
 
 ```bash
 cd .pi/extensions/terminal-browser-search
 npm run build
+```
+
+Pack validation:
+
+```bash
+npm run pack:check
 ```
 
 ## Security Notes
@@ -122,3 +141,13 @@ npm run build
 ## License
 This project is licensed under the MIT License.
 See [LICENSE](./LICENSE).
+
+## Official Package Listing
+To request inclusion in Pi's curated/official package ecosystem:
+
+1. Publish package to npm (`pi-terminal-browser-search`)
+2. Open submission request in `badlogic/pi-mono`
+3. Include install command, repository URL, safety model, and demo evidence
+
+Detailed checklist:
+- [docs/OFFICIAL_SUBMISSION.md](./docs/OFFICIAL_SUBMISSION.md)

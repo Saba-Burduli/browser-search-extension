@@ -1,0 +1,50 @@
+{
+  "name": "pi-terminal-browser-search",
+  "version": "0.1.0",
+  "description": "Chrome-first /search command extension package for Pi Coding Agent",
+  "license": "MIT",
+  "author": "Saba Burduli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Saba-Burduli/terminal-browser-search-extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Saba-Burduli/terminal-browser-search-extension/issues"
+  },
+  "homepage": "https://github.com/Saba-Burduli/terminal-browser-search-extension#readme",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "pi-harness",
+    "search",
+    "chrome"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "README.md",
+    "LICENSE",
+    "AGENTS.md",
+    ".pi/SYSTEM.md",
+    ".pi/terminal-browser-search.config.json",
+    ".pi/extensions/terminal-browser-search/bin",
+    ".pi/extensions/terminal-browser-search/src",
+    ".pi/extensions/terminal-browser-search/extension.json",
+    ".pi/extensions/terminal-browser-search/package.json",
+    ".pi/extensions/terminal-browser-search/tsconfig.json"
+  ],
+  "scripts": {
+    "build": "npm --prefix .pi/extensions/terminal-browser-search run build",
+    "prepack": "npm run build",
+    "pack:check": "npm pack --dry-run"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "pi": {
+    "extensions": [
+      "./.pi/extensions/terminal-browser-search/src/pi-extension.ts"
+    ]
+  }
+}
