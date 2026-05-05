@@ -1,17 +1,17 @@
 {
   "name": "@saba-burduli/pi-browser-search-extension",
-  "version": "0.1.0",
-  "description": "Chrome-first /search command extension package for Pi Coding Agent",
+  "version": "0.1.1",
+  "description": "/search command extension package for Pi Coding Agent",
   "license": "MIT",
   "author": "Saba Burduli",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Saba-Burduli/browser-search-extension.git"
+    "url": "git+https://github.com/Saba-Burduli/pi-browser-search-extension.git"
   },
   "bugs": {
-    "url": "https://github.com/Saba-Burduli/browser-search-extension/issues"
+    "url": "https://github.com/Saba-Burduli/pi-browser-search-extension/issues"
   },
-  "homepage": "https://github.com/Saba-Burduli/browser-search-extension#readme",
+  "homepage": "https://github.com/Saba-Burduli/pi-browser-search-extension#readme",
   "keywords": [
     "pi-package",
     "pi-extension",

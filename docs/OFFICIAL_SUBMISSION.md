@@ -10,14 +10,14 @@ npm publish
 ```
 
 Package name:
-- `pi-browser-search-extension`
+- `@saba-burduli/pi-browser-search-extension`
 
 ## 2. Verify install path
 
 After publish:
 
 ```bash
-pi install npm:pi-browser-search-extension
+pi install npm:@saba-burduli/pi-browser-search-extension
 ```
 
 ## 3. Request official curation/listing
@@ -36,12 +36,12 @@ Include:
 ## 4. Suggested request template
 
 Title:
-- `Package submission: pi-browser-search-extension`
+- `Package submission: @saba-burduli/pi-browser-search-extension`
 
 Body:
 - What it does
 - Why it is useful
-- How to install (`pi install npm:pi-browser-search-extension`)
+- How to install (`pi install npm:@saba-burduli/pi-browser-search-extension`)
 - Security notes
 - Compatibility notes (Node >= 20, macOS system browser launcher with Chrome/Firefox/Brave/Safari/Dia support)
 
