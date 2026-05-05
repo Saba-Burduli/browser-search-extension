@@ -2,6 +2,9 @@
 
 Chrome-first Pi Harness extension that opens Google search results directly from `/search <query>` with minimal, terminal-silent UX.
 
+NPM package:
+- https://www.npmjs.com/package/pi-terminal-browser-search
+
 ## Overview
 This extension is designed for fast action, not conversational search explanations.
 When a user runs `/search dotnet docs`, Pi immediately launches Google Chrome with an encoded Google query URL.
