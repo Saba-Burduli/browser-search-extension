@@ -29,6 +29,7 @@ Include:
 - npm package link
 - GitHub repository link
 - Short feature summary (include multi-browser support: system default, Chrome, Firefox, Brave, Safari, Dia)
+- Update behavior summary (opt-in update checker, throttled, local notifications)
 - Safety model (trusted URLs, sanitized query)
 - Demo GIF/video or screenshot (optional but recommended)
 - Maintenance commitment and contact

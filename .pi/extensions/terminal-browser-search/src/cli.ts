@@ -14,6 +14,8 @@ async function main(): Promise<void> {
     cwd: process.cwd(),
   });
 
+  runtime.triggerUpdateCheck();
+
   const result = await runtime.runCommand(rawInput);
 
   if (!result.ok) {

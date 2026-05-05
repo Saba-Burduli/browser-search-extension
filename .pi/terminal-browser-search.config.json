@@ -9,6 +9,13 @@
     "allowedHosts": ["www.google.com", "google.com"]
   },
   "incognito": false,
+  "updates": {
+    "enabled": false,
+    "checkIntervalHours": 24,
+    "source": "github-releases",
+    "repository": "Saba-Burduli/pi-browser-search-extension",
+    "notify": "macos-notification"
+  },
   "context": {
     "maxMessagesForSearchIntent": 12
   },

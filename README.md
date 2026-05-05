@@ -24,6 +24,7 @@ Primary behavior:
 - System-default browser auto-detection on macOS when `defaultBrowser=system`
 - Trusted host enforcement (`https://www.google.com/search?q=...`)
 - Config-driven dry-run and auto-open toggles
+- Opt-in update checker with local cache and machine-level notifications
 - Dynamic context hook (`beforeTurn`) for search intent biasing
 - Optional compaction strategy preserving command/query relevance
 - Extensible launcher abstraction for future browsers
@@ -52,6 +53,10 @@ Relevant settings:
 - `autoOpenBrowser` (bool): open browser automatically
 - `dryRun` (bool): build URL without opening browser
 - `defaultBrowser` (`system`/`chrome`/`firefox`/`brave`/`safari`/`dia`)
+- `updates.enabled` (bool): enable/disable update checks
+- `updates.checkIntervalHours` (number): minimum hours between checks
+- `updates.repository` (`owner/repo`): GitHub repo used for release lookup
+- `updates.notify` (`none`/`terminal`/`macos-notification`): update alert channel
 - `searchEngine.baseUrl` (default Google search)
 - `searchEngine.queryParam` (default `q`)
 - `searchEngine.allowedHosts` (allowlist)
@@ -61,6 +66,10 @@ Environment overrides:
 - `PI_SEARCH_DRY_RUN`
 - `PI_SEARCH_INCOGNITO`
 - `PI_SEARCH_BROWSER`
+- `PI_SEARCH_UPDATES_ENABLED`
+- `PI_SEARCH_UPDATES_NOTIFY`
+- `PI_SEARCH_UPDATES_INTERVAL_HOURS`
+- `PI_SEARCH_UPDATES_REPOSITORY`
 
 ## Project Structure
 ```text

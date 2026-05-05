@@ -35,6 +35,7 @@ Execution is system-level (real process launch), not simulated output.
 - No unnecessary output.
 - Prefer execution over explanation when intent is clear.
 - Prefer system-level command invocation over simulation.
+- Keep update messaging opt-in and non-blocking.
 
 ## Safety Constraints
 - Only open trusted search URLs.

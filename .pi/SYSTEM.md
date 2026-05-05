@@ -36,8 +36,12 @@ Config file: `.pi/terminal-browser-search.config.json`
   - `false`: normal behavior
 
 Resolution order:
-1. Environment variables (`PI_SEARCH_AUTO_OPEN`, `PI_SEARCH_DRY_RUN`, `PI_SEARCH_INCOGNITO`, `PI_SEARCH_BROWSER`)
+1. Environment variables (`PI_SEARCH_AUTO_OPEN`, `PI_SEARCH_DRY_RUN`, `PI_SEARCH_INCOGNITO`, `PI_SEARCH_BROWSER`, `PI_SEARCH_UPDATES_ENABLED`, `PI_SEARCH_UPDATES_NOTIFY`, `PI_SEARCH_UPDATES_INTERVAL_HOURS`, `PI_SEARCH_UPDATES_REPOSITORY`)
 2. Project config file
 3. Defaults
 
 If `dryRun=true`, it overrides `autoOpenBrowser=true`.
+
+## Update Notice (Opt-In)
+- Update checks are disabled by default.
+- When enabled, the extension checks GitHub releases on a throttled interval and can notify through terminal or macOS notification center.

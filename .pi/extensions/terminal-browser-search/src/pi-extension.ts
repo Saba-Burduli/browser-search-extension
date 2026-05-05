@@ -10,6 +10,9 @@ export default function terminalBrowserSearch(pi: any) {
       const rawInput = `search ${trimmed}`;
       const runtime = new SearchRuntime({ projectRoot: ctx.cwd, cwd: ctx.cwd });
 
+      // Non-blocking update check (opt-in, throttled by cache interval).
+      runtime.triggerUpdateCheck();
+
       // Fire-and-forget for immediate UX; all execution remains silent.
       void runtime.runCommand(rawInput).catch(() => {
         // Silent by design.

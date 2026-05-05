@@ -6,6 +6,7 @@ export interface SearchEngineConfig {
 }
 
 export type BrowserKind = "system" | "chrome" | "firefox" | "safari" | "brave" | "dia";
+export type UpdateNotifyMode = "none" | "terminal" | "macos-notification";
 
 export interface ExtensionConfig {
   autoOpenBrowser: boolean;
@@ -13,6 +14,13 @@ export interface ExtensionConfig {
   defaultBrowser: BrowserKind;
   searchEngine: SearchEngineConfig;
   incognito: boolean;
+  updates: {
+    enabled: boolean;
+    checkIntervalHours: number;
+    source: "github-releases";
+    repository: string;
+    notify: UpdateNotifyMode;
+  };
   context: {
     maxMessagesForSearchIntent: number;
   };

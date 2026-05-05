@@ -6,6 +6,7 @@ import { createBrowserLauncher } from "./BrowserLauncherFactory";
 import { DynamicContextHook } from "./DynamicContextHook";
 import { CompactionStrategy } from "./CompactionStrategy";
 import { loadAgentContext } from "./AgentContextResolver";
+import { checkForUpdate } from "./UpdateChecker";
 import type {
   BeforeTurnInput,
   BeforeTurnResult,
@@ -22,6 +23,7 @@ export class SearchRuntime {
   private readonly launcher;
   private readonly dynamicContext;
   private readonly compaction;
+  private updateCheckPromise: Promise<void> | null = null;
 
   constructor(private readonly options: RuntimeOptions) {
     this.config = loadConfig(options.projectRoot);
@@ -99,6 +101,14 @@ export class SearchRuntime {
       url,
       commandPreview: launch.commandPreview,
     };
+  }
+
+  triggerUpdateCheck(): void {
+    if (this.updateCheckPromise) return;
+
+    this.updateCheckPromise = checkForUpdate(this.config).finally(() => {
+      this.updateCheckPromise = null;
+    });
   }
 
   beforeTurn(input: BeforeTurnInput): BeforeTurnResult {
