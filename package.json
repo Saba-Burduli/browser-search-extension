@@ -1,5 +1,5 @@
 {
-  "name": "@saba-burduli/pi-terminal-browser-search",
+  "name": "@saba-burduli/pi-browser-search-extension",
   "version": "0.1.0",
   "description": "Chrome-first /search command extension package for Pi Coding Agent",
   "license": "MIT",
