@@ -15,8 +15,5 @@
     "compact": "dist/hooks.js",
     "agentContext": "dist/hooks.js"
   },
-  "systemPrompt": "../../SYSTEM.md",
-  "templates": {
-    "search": "../../prompts/search.md"
-  }
+  "systemPrompt": "../../SYSTEM.md"
 }
