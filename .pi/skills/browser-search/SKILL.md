@@ -1,12 +1,12 @@
 ---
-name: browser.search
+name: browser-search
 description: Trigger trusted browser search flows from terminal intent and execute with a concrete browser launcher.
 metadata:
-  canonical_name: browser.search
+  canonical_name: browser-search
   lazy_load: true
 ---
 
-# Skill: browser.search
+# Skill: browser-search
 
 Use this skill only when the user asks to search the web.
 
