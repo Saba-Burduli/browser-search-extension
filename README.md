@@ -1,4 +1,4 @@
-# Terminal Browser Search Extension
+# Browser Search Extension
 
 Chrome-first Pi Harness extension that opens Google search results directly from `/search <query>` with minimal, terminal-silent UX.
 
@@ -61,7 +61,7 @@ Environment overrides:
 
 ## Project Structure
 ```text
-terminal-browser-search-extension/
+browser-search-extension/
 ├── AGENTS.md
 ├── LICENSE
 ├── README.md

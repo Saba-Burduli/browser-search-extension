@@ -6,12 +6,12 @@
   "author": "Saba Burduli",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Saba-Burduli/terminal-browser-search-extension.git"
+    "url": "git+https://github.com/Saba-Burduli/browser-search-extension.git"
   },
   "bugs": {
-    "url": "https://github.com/Saba-Burduli/terminal-browser-search-extension/issues"
+    "url": "https://github.com/Saba-Burduli/browser-search-extension/issues"
   },
-  "homepage": "https://github.com/Saba-Burduli/terminal-browser-search-extension#readme",
+  "homepage": "https://github.com/Saba-Burduli/browser-search-extension#readme",
   "keywords": [
     "pi-package",
     "pi-extension",
