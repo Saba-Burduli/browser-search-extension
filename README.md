@@ -1,54 +1,90 @@
-# Terminal Browser Search Extension (Pi Harness)
+# Terminal Browser Search Extension
 
-Production-ready Pi Harness extension for Chrome-first terminal search.
+Chrome-first Pi Harness extension that opens Google search results directly from `/search <query>` with minimal, terminal-silent UX.
 
-## Core Command
-- `search <query>`
+## Overview
+This extension is designed for fast action, not conversational search explanations.
+When a user runs `/search dotnet docs`, Pi immediately launches Google Chrome with an encoded Google query URL.
 
-Behavior:
-- Encodes query
-- Builds Google search URL
-- Validates trusted host
-- Opens in browser (`Google Chrome` default)
+Primary behavior:
+- Accept user query input from `/search <query>`
+- Sanitize and normalize query text
+- Encode query safely
+- Enforce trusted URL policy
+- Open Chrome via system command on macOS
+- Keep command execution silent from the user perspective
+
+## Features
+- Native Pi extension command: `/search <query>`
+- Dynamic query support (no hardcoded terms)
+- Trusted host enforcement (`https://www.google.com/search?q=...`)
+- Config-driven dry-run and auto-open toggles
+- Dynamic context hook (`beforeTurn`) for search intent biasing
+- Optional compaction strategy preserving command/query relevance
+- Extensible launcher abstraction for future browsers
+
+## How It Works
+Runtime flow:
+1. Pi command `/search <query>` is handled by extension command registration in `src/pi-extension.ts`.
+2. Query is parsed and sanitized by `CommandParser`.
+3. URL is built by `QueryEncoder`.
+4. URL is validated by `UrlPolicy`.
+5. Launcher factory selects browser launcher (Chrome default).
+6. `open -a "Google Chrome" "<url>"` executes.
+
+## Command
+- `/search <query>`
+
+Examples:
+- `/search dotnet docs`
+- `/search openai codex prompt templates`
+
+## Configuration
+Config file:
+- `.pi/terminal-browser-search.config.json`
+
+Relevant settings:
+- `autoOpenBrowser` (bool): open browser automatically
+- `dryRun` (bool): build URL without opening browser
+- `defaultBrowser` (chrome/firefox/safari)
+- `searchEngine.baseUrl` (default Google search)
+- `searchEngine.queryParam` (default `q`)
+- `searchEngine.allowedHosts` (allowlist)
+
+Environment overrides:
+- `PI_SEARCH_AUTO_OPEN`
+- `PI_SEARCH_DRY_RUN`
+- `PI_SEARCH_INCOGNITO`
 
 ## Project Structure
 ```text
 terminal-browser-search-extension/
 ├── AGENTS.md
+├── LICENSE
 ├── README.md
 └── .pi/
     ├── SYSTEM.md
     ├── terminal-browser-search.config.json
-    ├── prompts/
-    │   └── search.md
     └── extensions/
         └── terminal-browser-search/
             ├── extension.json
             ├── package.json
             ├── tsconfig.json
-            ├── bin/
-            │   └── search.js
-            └── src/
-                ├── AgentContextResolver.ts
-                ├── BrowserLauncherFactory.ts
-                ├── CommandParser.ts
-                ├── CompactionStrategy.ts
-                ├── Config.ts
-                ├── DynamicContextHook.ts
-                ├── QueryEncoder.ts
-                ├── SearchRuntime.ts
-                ├── UrlPolicy.ts
-                ├── cli.ts
-                ├── extension.ts
-                ├── hooks.ts
-                ├── index.ts
-                ├── launchers/
-                │   └── MacOSBrowserLauncher.ts
-                └── types.ts
+            ├── bin/search.js
+            ├── src/pi-extension.ts
+            ├── src/SearchRuntime.ts
+            ├── src/CommandParser.ts
+            ├── src/QueryEncoder.ts
+            ├── src/UrlPolicy.ts
+            ├── src/BrowserLauncherFactory.ts
+            ├── src/launchers/MacOSBrowserLauncher.ts
+            ├── src/DynamicContextHook.ts
+            ├── src/CompactionStrategy.ts
+            └── src/hooks.ts
 ```
 
-## Install Into Pi Harness
-From extension package root:
+## Install
+From repo root:
 
 ```bash
 cd .pi/extensions/terminal-browser-search
@@ -56,51 +92,33 @@ npm install
 npm run build
 ```
 
-Optional global CLI link:
+Then reload Pi resources:
 
-```bash
-npm link
+```text
+/reload
 ```
 
-Then use from project root:
+## Development
+Build:
 
 ```bash
-search "latest dotnet performance"
+cd .pi/extensions/terminal-browser-search
+npm run build
 ```
 
-If you do not want auto-open:
+## Security Notes
+- Only trusted search URLs are opened.
+- Query input is sanitized before URL construction.
+- Invalid or empty queries are rejected.
+- No hardcoded token or secret handling in runtime flow.
 
-```bash
-PI_SEARCH_DRY_RUN=1 search "latest dotnet performance"
-```
+## Compatibility
+- Platform: macOS launcher path implemented (`open -a "Google Chrome" ...`)
+- Node.js: `>=20`
 
-## Hook Integration
-Use `dist/hooks.js` for runtime hooks:
-- `beforeTurn`:
-  - Detects search-like input (`search`, `google`, `look up`, `find online`)
-  - Injects hint: `User likely wants a browser search. Consider using search command.`
-  - Filters old context to recent messages for lower latency
-- `compact`:
-  - Preserves command history and recent queries
-  - Summarizes older irrelevant messages
-- `agentContext`:
-  - Merges AGENTS context from:
-    - `~/.pi/agent/AGENTS.md`
-    - project root `AGENTS.md`
-    - current directory `AGENTS.md`
+## Developer
+- Saba Burduli
 
-## Prompt Templates
-- `/search latest dotnet performance`
-  - Expands to `search "latest dotnet performance"`
-
-## Error Handling
-- Empty query: returns usage error
-- Invalid command: returns usage error
-- Browser missing: clear unavailable message
-- Untrusted URL: blocked before launch
-
-## Extensibility
-Prepared for:
-- Browsers: Chrome, Firefox, Safari (`IBrowserLauncher` pattern)
-- Engines: configurable `searchEngine` (`baseUrl`, `queryParam`, `allowedHosts`)
-- Modes: dry-run, incognito, auto-open toggles
+## License
+This project is licensed under the MIT License.
+See [LICENSE](./LICENSE).
