@@ -10,11 +10,10 @@ export default function terminalBrowserSearch(pi: any) {
       const rawInput = `search ${trimmed}`;
       const runtime = new SearchRuntime({ projectRoot: ctx.cwd, cwd: ctx.cwd });
 
-      try {
-        await runtime.runCommand(rawInput);
-      } catch {
+      // Fire-and-forget for immediate UX; all execution remains silent.
+      void runtime.runCommand(rawInput).catch(() => {
         // Silent by design.
-      }
+      });
     },
   });
 }
