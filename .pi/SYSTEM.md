@@ -16,6 +16,7 @@ Intent cues include:
 - Always sanitize query input.
 - Always URL-encode query values.
 - Prefer opening browser over returning plain links.
+- Resolve browser from system default when `defaultBrowser=system`.
 - Stay terminal-first and action-oriented.
 - Keep responses minimal after successful launch.
 
@@ -35,7 +36,7 @@ Config file: `.pi/terminal-browser-search.config.json`
   - `false`: normal behavior
 
 Resolution order:
-1. Environment variables (`PI_SEARCH_AUTO_OPEN`, `PI_SEARCH_DRY_RUN`, `PI_SEARCH_INCOGNITO`)
+1. Environment variables (`PI_SEARCH_AUTO_OPEN`, `PI_SEARCH_DRY_RUN`, `PI_SEARCH_INCOGNITO`, `PI_SEARCH_BROWSER`)
 2. Project config file
 3. Defaults
 

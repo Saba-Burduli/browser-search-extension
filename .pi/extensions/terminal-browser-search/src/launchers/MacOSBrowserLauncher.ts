@@ -8,7 +8,7 @@ export class MacOSBrowserLauncher implements IBrowserLauncher {
   constructor(
     public readonly browserName: string,
     private readonly appName: string,
-    private readonly supportsIncognito: boolean,
+    private readonly incognitoArgs: string[] = [],
   ) {}
 
   async isAvailable(): Promise<{ ok: boolean; reason?: string }> {
@@ -21,7 +21,7 @@ export class MacOSBrowserLauncher implements IBrowserLauncher {
   }
 
   async open(url: string, options?: BrowserLaunchOptions): Promise<BrowserLaunchResult> {
-    const incognito = Boolean(options?.incognito && this.supportsIncognito);
+    const incognito = Boolean(options?.incognito && this.incognitoArgs.length > 0);
     const args = this.buildArgs(url, incognito);
 
     try {
@@ -48,19 +48,7 @@ export class MacOSBrowserLauncher implements IBrowserLauncher {
       return ["-a", this.appName, url];
     }
 
-    if (this.appName === "Google Chrome") {
-      return ["-a", this.appName, "--args", "--incognito", url];
-    }
-
-    if (this.appName === "Firefox") {
-      return ["-a", this.appName, "--args", "-private-window", url];
-    }
-
-    if (this.appName === "Safari") {
-      return ["-a", this.appName, url];
-    }
-
-    return ["-a", this.appName, url];
+    return ["-a", this.appName, "--args", ...this.incognitoArgs, url];
   }
 
   private preview(args: string[]): string {

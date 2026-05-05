@@ -43,7 +43,7 @@ Body:
 - Why it is useful
 - How to install (`pi install npm:pi-browser-search-extension`)
 - Security notes
-- Compatibility notes (Node >= 20, macOS Chrome path)
+- Compatibility notes (Node >= 20, macOS system browser launcher with Chrome/Firefox/Brave/Safari/Dia support)
 
 ## 5. Ongoing maintenance expectations
 

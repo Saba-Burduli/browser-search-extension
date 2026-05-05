@@ -4,7 +4,7 @@
 Provide a native Pi Harness extension for terminal-first web search with one command:
 - `search <query>`
 
-The extension converts query text into a trusted Google search URL and opens it in Google Chrome by default.
+The extension converts query text into a trusted Google search URL and opens it in the system default browser by default.
 
 ## Available Commands
 - `search <query>`
@@ -13,10 +13,15 @@ The extension converts query text into a trusted Google search URL and opens it 
   - Prints URL only, no browser launch
 
 ## Browser Launch Behavior
-- macOS default launcher:
-  - `open -a "Google Chrome" "<url>"`
-- macOS incognito launcher:
-  - `open -a "Google Chrome" --args --incognito "<url>"`
+- Browser targets:
+  - `system` (auto-detect default browser)
+  - `chrome`, `firefox`, `brave`, `safari`, `dia`
+- macOS launch command pattern:
+  - `open -a "<Browser App>" "<url>"`
+- Incognito/private mode:
+  - Chrome/Brave/Dia: `--incognito`
+  - Firefox: `-private-window`
+  - Safari: normal window fallback
 
 Execution is system-level (real process launch), not simulated output.
 

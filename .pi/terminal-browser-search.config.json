@@ -1,7 +1,7 @@
 {
   "autoOpenBrowser": true,
   "dryRun": false,
-  "defaultBrowser": "chrome",
+  "defaultBrowser": "system",
   "searchEngine": {
     "name": "google",
     "baseUrl": "https://www.google.com/search",

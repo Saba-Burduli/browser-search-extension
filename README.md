@@ -1,25 +1,26 @@
 # Browser Search Extension
 
-Chrome-first Pi Harness extension that opens Google search results directly from `/search <query>` with minimal, terminal-silent UX.
+Pi Harness extension that opens Google search results directly from `/search <query>` with minimal, terminal-silent UX.
 
 NPM package:
 - https://www.npmjs.com/package/pi-browser-search-extension
 
 ## Overview
 This extension is designed for fast action, not conversational search explanations.
-When a user runs `/search dotnet docs`, Pi immediately launches Google Chrome with an encoded Google query URL.
+When a user runs `/search dotnet docs`, Pi immediately launches the selected browser with an encoded Google query URL.
 
 Primary behavior:
 - Accept user query input from `/search <query>`
 - Sanitize and normalize query text
 - Encode query safely
 - Enforce trusted URL policy
-- Open Chrome via system command on macOS
+- Open the selected browser via system command on macOS
 - Keep command execution silent from the user perspective
 
 ## Features
 - Native Pi extension command: `/search <query>`
 - Dynamic query support (no hardcoded terms)
+- Browser support: `system`, `chrome`, `firefox`, `brave`, `safari`, `dia`
 - Trusted host enforcement (`https://www.google.com/search?q=...`)
 - Config-driven dry-run and auto-open toggles
 - Dynamic context hook (`beforeTurn`) for search intent biasing
@@ -32,8 +33,8 @@ Runtime flow:
 2. Query is parsed and sanitized by `CommandParser`.
 3. URL is built by `QueryEncoder`.
 4. URL is validated by `UrlPolicy`.
-5. Launcher factory selects browser launcher (Chrome default).
-6. `open -a "Google Chrome" "<url>"` executes.
+5. Launcher factory selects browser launcher (`system` auto-detects your default browser).
+6. `open -a "<Browser App>" "<url>"` executes.
 
 ## Command
 - `/search <query>`
@@ -49,7 +50,7 @@ Config file:
 Relevant settings:
 - `autoOpenBrowser` (bool): open browser automatically
 - `dryRun` (bool): build URL without opening browser
-- `defaultBrowser` (chrome/firefox/safari)
+- `defaultBrowser` (`system`/`chrome`/`firefox`/`brave`/`safari`/`dia`)
 - `searchEngine.baseUrl` (default Google search)
 - `searchEngine.queryParam` (default `q`)
 - `searchEngine.allowedHosts` (allowlist)
@@ -58,6 +59,7 @@ Environment overrides:
 - `PI_SEARCH_AUTO_OPEN`
 - `PI_SEARCH_DRY_RUN`
 - `PI_SEARCH_INCOGNITO`
+- `PI_SEARCH_BROWSER`
 
 ## Project Structure
 ```text
@@ -135,7 +137,7 @@ npm run pack:check
 - No hardcoded token or secret handling in runtime flow.
 
 ## Compatibility
-- Platform: macOS launcher path implemented (`open -a "Google Chrome" ...`)
+- Platform: macOS launcher path implemented (`open -a "<Browser App>" ...`)
 - Node.js: `>=20`
 
 ## Developer

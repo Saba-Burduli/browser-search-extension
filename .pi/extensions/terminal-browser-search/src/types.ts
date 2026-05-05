@@ -5,10 +5,12 @@ export interface SearchEngineConfig {
   allowedHosts: string[];
 }
 
+export type BrowserKind = "system" | "chrome" | "firefox" | "safari" | "brave" | "dia";
+
 export interface ExtensionConfig {
   autoOpenBrowser: boolean;
   dryRun: boolean;
-  defaultBrowser: "chrome" | "firefox" | "safari";
+  defaultBrowser: BrowserKind;
   searchEngine: SearchEngineConfig;
   incognito: boolean;
   context: {

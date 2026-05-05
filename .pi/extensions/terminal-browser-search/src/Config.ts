@@ -1,11 +1,11 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import type { ExtensionConfig } from "./types";
+import type { BrowserKind, ExtensionConfig } from "./types";
 
 const DEFAULT_CONFIG: ExtensionConfig = {
   autoOpenBrowser: true,
   dryRun: false,
-  defaultBrowser: "chrome",
+  defaultBrowser: "system",
   searchEngine: {
     name: "google",
     baseUrl: "https://www.google.com/search",
@@ -32,6 +32,23 @@ function parseBoolean(value: string | undefined): boolean | undefined {
   return undefined;
 }
 
+function parseBrowserKind(value: string | undefined): BrowserKind | undefined {
+  if (!value) return undefined;
+  const normalized = value.trim().toLowerCase();
+  if (
+    normalized === "system" ||
+    normalized === "chrome" ||
+    normalized === "firefox" ||
+    normalized === "safari" ||
+    normalized === "brave" ||
+    normalized === "dia"
+  ) {
+    return normalized;
+  }
+
+  return undefined;
+}
+
 export function loadConfig(projectRoot: string): ExtensionConfig {
   const configPath = join(projectRoot, ".pi", "terminal-browser-search.config.json");
   let parsed = {} as Partial<ExtensionConfig>;
@@ -47,10 +64,13 @@ export function loadConfig(projectRoot: string): ExtensionConfig {
   const envAutoOpen = parseBoolean(process.env.PI_SEARCH_AUTO_OPEN);
   const envDryRun = parseBoolean(process.env.PI_SEARCH_DRY_RUN);
   const envIncognito = parseBoolean(process.env.PI_SEARCH_INCOGNITO);
+  const envBrowser = parseBrowserKind(process.env.PI_SEARCH_BROWSER);
+  const parsedBrowser = parseBrowserKind((parsed as { defaultBrowser?: string }).defaultBrowser);
 
   const merged: ExtensionConfig = {
     ...DEFAULT_CONFIG,
     ...parsed,
+    defaultBrowser: parsedBrowser ?? DEFAULT_CONFIG.defaultBrowser,
     searchEngine: {
       ...DEFAULT_CONFIG.searchEngine,
       ...(parsed.searchEngine ?? {}),
@@ -69,6 +89,7 @@ export function loadConfig(projectRoot: string): ExtensionConfig {
   if (envAutoOpen !== undefined) merged.autoOpenBrowser = envAutoOpen;
   if (envDryRun !== undefined) merged.dryRun = envDryRun;
   if (envIncognito !== undefined) merged.incognito = envIncognito;
+  if (envBrowser !== undefined) merged.defaultBrowser = envBrowser;
 
   return merged;
 }
