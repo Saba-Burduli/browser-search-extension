@@ -1,5 +1,5 @@
 {
-  "name": "@saba-burduli/pi-browser-search-extension",
+  "name": "pi-terminal-browser-search",
   "version": "0.1.1",
   "description": "Pi Harness /search extension with system-default and multi-browser support",
   "license": "MIT",
@@ -41,7 +41,8 @@
     "pack:check": "npm pack --dry-run"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "pi": {
     "extensions": [

@@ -3,7 +3,7 @@
 Pi Harness extension that opens Google search results directly from `/search <query>` with multi-browser support and minimal terminal-silent UX.
 
 NPM package:
-- [https://www.npmjs.com/package/@saba-burduli/pi-browser-search-extension](https://www.npmjs.com/package/pi-terminal-browser-search)
+- https://www.npmjs.com/package/pi-terminal-browser-search
 
 ## Overview
 This extension is designed for fast action, not conversational search explanations.
@@ -117,7 +117,7 @@ Then reload Pi resources:
 After package publication:
 
 ```bash
-pi install npm:@saba-burduli/pi-browser-search-extension
+pi install npm:pi-terminal-browser-search
 ```
 
 Then reload resources:
@@ -161,7 +161,7 @@ See [LICENSE](./LICENSE).
 ## Official Package Listing
 To request inclusion in Pi's curated/official package ecosystem:
 
-1. Publish package to npm (`@saba-burduli/pi-browser-search-extension`)
+1. Publish package to npm (`pi-terminal-browser-search`)
 2. Open submission request in `badlogic/pi-mono`
 3. Include install command, repository URL, safety model, and demo evidence
 

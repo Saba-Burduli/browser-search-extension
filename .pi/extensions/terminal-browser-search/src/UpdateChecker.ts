@@ -19,7 +19,7 @@ type GitHubRelease = {
   tag_name?: string;
 };
 
-const CACHE_FILE = join(homedir(), ".pi", "cache", "pi-browser-search-extension", "update-check.json");
+const CACHE_FILE = join(homedir(), ".pi", "cache", "pi-terminal-browser-search", "update-check.json");
 const PACKAGE_JSON_CANDIDATES = [
   resolve(__dirname, "..", "..", "..", "..", "package.json"),
   resolve(__dirname, "..", "package.json"),
@@ -68,7 +68,10 @@ function getCurrentPackageVersion(): string | undefined {
         version?: string;
       };
       if (typeof parsed.version !== "string") continue;
-      if (typeof parsed.name === "string" && parsed.name.includes("pi-browser-search-extension")) {
+      if (
+        typeof parsed.name === "string" &&
+        (parsed.name.includes("pi-terminal-browser-search") || parsed.name.includes("pi-browser-search-extension"))
+      ) {
         return sanitizeVersion(parsed.version);
       }
     } catch {
@@ -87,7 +90,7 @@ function httpGetJson(url: string): Promise<unknown> {
         method: "GET",
         headers: {
           Accept: "application/vnd.github+json",
-          "User-Agent": "pi-browser-search-extension",
+          "User-Agent": "pi-terminal-browser-search",
         },
       },
       (response) => {
@@ -176,7 +179,7 @@ async function notifyUpdate(config: ExtensionConfig, currentVersion: string, lat
 
   if (config.updates.notify === "terminal" || config.updates.notify === "macos-notification") {
     // Keep output compact and explicit.
-    console.warn(`[pi-browser-search-extension] ${message}`);
+    console.warn(`[pi-terminal-browser-search] ${message}`);
   }
 }
 
